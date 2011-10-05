@@ -30,10 +30,10 @@ class sfImageWrapper {
 	 * @return sfImageWrapper
 	 */
 	public function __call( $sMethodName, $aArgs ) {
-		$aPresetsConfig = sfConfig::get( 'presets' );				
+		$aPresetsConfig = sfConfig::get( 'presets' );
+		$aPresetConfig = $aPresetsConfig[$sMethodName];
 
-		if ( isset( $aPresetsConfig[$sMethodName] ) ) {
-			$aPresetConfig = $aPresetsConfig[$sMethodName];
+		if ( isset( $aPresetConfig ) ) {
 			//transformations
 			$aTransformations = $aPresetConfig['transformations'];
 			foreach ( $aTransformations as $aPreset ) {
@@ -81,7 +81,8 @@ class sfImageWrapper {
 		$this->bKeyIsDirty = true;
 	}
 
-	public function __toString() {
+
+        public function __toString() {
 		return $this->Fetch();
 	}
 

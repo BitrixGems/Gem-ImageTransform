@@ -32,7 +32,7 @@ class BitrixGem_ImageTransform extends BaseBitrixGem {
 				'height' => '100',
 				'color' => '#FFFFFF',
 			),
-			'font_dir' => $this->getGemFolder().'/fonts/dejavu-fonts-ttf-2.33/ttf/',
+			'font_dir' => '/usr/share/fonts/truetype/msttcorefonts',
 			'mime_type' => array(
 				'auto_detect' => true,
 				'library' => 'gd_mime_type'
@@ -42,6 +42,10 @@ class BitrixGem_ImageTransform extends BaseBitrixGem {
 			//пресеты трансформаций
 			'presets' => array()
 		);
+	}
+
+	public function getOpt(){
+		return $this->getOptions();
 	}
 
 	public function needAdminPage() {

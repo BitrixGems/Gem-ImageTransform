@@ -147,15 +147,15 @@ class sfImage
         $y = (int)$defaults['height'];
       }
     }
-  
+
     $this->getAdapter()->create($x, $y);
     $this->getAdapter()->setFilename($defaults['filename']);
-    
+
     // Set the image color if set
     if(is_null($color))
     {
       $color = '#FFFFFF';
-      
+
       if(isset($defaults['color']))
       {
         $color = $defaults['color'];
@@ -163,7 +163,7 @@ class sfImage
     }
 
     $this->fill(0, 0, $color);
-    
+
     return $this;
   }
 
@@ -212,7 +212,7 @@ class sfImage
   public function loadString($string)
   {
     $this->getAdapter()->loadString($string);
-    
+
     return $this;
   }
 
@@ -304,7 +304,7 @@ class sfImage
   /**
    * Magic method. This allows the calling of execute tranform methods on sfImageTranform objects.
    *
-   * @method 
+   * @method
    * @param string $name the name of the transform, sfImage<NAME>
    * @param array Arguments for the transform class execute method
    * @return sfImage
@@ -471,12 +471,14 @@ class sfImage
     if (false === $settings['auto_detect'])
     {
       return false;
-    }
+    };
+
 
     if (in_array(strtolower($settings['library']), $support_libraries) && '' !== $filename)
     {
       if('gd_mime_type' === strtolower($settings['library']))
       {
+
         if (!extension_loaded('gd'))
         {
           throw new Exception ('GD not enabled. Cannot detect mime type using GD.');
@@ -484,6 +486,7 @@ class sfImage
 
         $imgData = GetImageSize($filename);
 
+ //var_dump($imgData);
         if (isset($imgData['mime']))
         {
           return $imgData['mime'];
@@ -541,9 +544,7 @@ class sfImage
     {
       $name = sfConfig::get('app_sfImageTransformPlugin_default_adapter','GD');
     }
-
     $adapter_class = 'sfImageTransform' . $name . 'Adapter';
-
     if (class_exists($adapter_class))
     {
       $adapter = new $adapter_class;
@@ -557,14 +558,14 @@ class sfImage
 
     return $adapter;
   }
- 
+
   /**
    * Copies the image object and returns it
    *
    * Returns a copy of the sfImage object
    *
    * @return sfImage
-   */ 
+   */
   public function __clone()
   {
   	$this->adapter = $this->adapter->copy();

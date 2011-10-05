@@ -41,9 +41,9 @@ class sfImageOverlayGD extends sfImageTransformAbstract
    * The named position for the overlay
    */
   protected $position = null;
-  
+
   /**
-   * available labels for overlay positions 
+   * available labels for overlay positions
    */
   protected $labels = array(
                             'top', 'bottom','left' ,'right', 'middle', 'center',
@@ -51,17 +51,18 @@ class sfImageOverlayGD extends sfImageTransformAbstract
                             'middle-left', 'middle-right', 'middle-center',
                             'bottom-left', 'bottom-right', 'bottom-center',
                            );
-  
-  
+
+
   /**
    * Construct an sfImageOverlay object.
    *
    * @param array mixed
    */
-  public function __construct(sfImage $overlay, $position='top-left')
+  public function __construct( $overlay, $position='top-left')
   {
+	if( !( $overlay instanceof sfImage )) $overlay = new sfImage($overlay);
     $this->setOverlay($overlay);
-    
+
     if (is_array($position) && count($position))
     {
 
@@ -109,10 +110,10 @@ class sfImageOverlayGD extends sfImageTransformAbstract
     if(is_numeric($left))
     {
       $this->left = $left;
-      
+
       return true;
     }
-    
+
     return false;
   }
 
@@ -136,10 +137,10 @@ class sfImageOverlayGD extends sfImageTransformAbstract
     if(is_numeric($top))
     {
       $this->top = $top;
-      
+
       return true;
     }
-    
+
     return false;
   }
 
@@ -157,12 +158,12 @@ class sfImageOverlayGD extends sfImageTransformAbstract
    * set the named position
    *
    * @param string $position named position. Possible named positions:
-   *                - top (alias of top-center), 
-   *                - bottom (alias of botom-center), 
-   *                - left ( alias of top-left), 
-   *                - right (alias of top-right), 
-   *                - center (alias of middle-center1), 
-   *                - top-left, top-right, top-center, 
+   *                - top (alias of top-center),
+   *                - bottom (alias of botom-center),
+   *                - left ( alias of top-left),
+   *                - right (alias of top-right),
+   *                - center (alias of middle-center1),
+   *                - top-left, top-right, top-center,
    *                - middle-left, middle-right, middle-center,
    *                - bottom-left, bottom-right, bottom-center
    *
@@ -170,34 +171,34 @@ class sfImageOverlayGD extends sfImageTransformAbstract
    */
   public function setPosition($position)
   {
-  
+
     // Backwards compatibility
     $map = array(
-                  'left' => 'west', 'right' => 'east', 'top' => 'north', 'bottom' => 'south', 
+                  'left' => 'west', 'right' => 'east', 'top' => 'north', 'bottom' => 'south',
                   'top west' => 'top-left', 'top east' => 'top-right', 'south west' => 'bottom-left', 'south east' => 'bottom-left'
                 );
-                
+
     if($key = array_search($position, $map))
     {
       // We're showing a log message for 1.1/1.2
       try
       {
         $message = sprintf('sfImageTransformPlugin overlay position \'%s\' is deprecated use \'%s\' instead', $position, $key);
-        sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, 'application.log', array($message, 'priority' => sfLogger::ERR)));
+       // sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, 'application.log', array($message, 'priority' => sfLogger::ERR)));
       }
       catch(Exception $e)
       {
         // 1.0
       }
     }
-  
+
     if(in_array($position, $this->labels))
     {
       $this->position = strtolower($position);
-      
+
       return true;
     }
-    
+
     return false;
   }
 
@@ -207,7 +208,7 @@ class sfImageOverlayGD extends sfImageTransformAbstract
    * @return string
    */
   public function getPosition()
-  { 
+  {
     return $this->position;
   }
 
@@ -321,7 +322,7 @@ class sfImageOverlayGD extends sfImageTransformAbstract
     $overlay_w   = $this->overlay->getWidth();
     $overlay_h   = $this->overlay->getHeight();
     $overlay_img = $this->overlay->getAdapter()->getHolder();
-    
+
     // copy and merge the overlay image and the canvas image:
     imagecopy($canvas_img, $overlay_img, $this->left,$this->top,0,0, $overlay_w, $overlay_h);
 

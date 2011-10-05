@@ -3,7 +3,7 @@
  * @uses sfConfig
  */
 class BGImageHelper {
-	
+
 	public static function usePreset( $sPath, $sPreset, &$oImage = null ) {
 		/**
 		 * @todo: возможность скармливать не только абсолютный путь
