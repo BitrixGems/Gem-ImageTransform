@@ -12,9 +12,9 @@ class BitrixGem_ImageTransform extends BaseBitrixGem {
 		'AUTHOR' => 'Kalinin Alexey',
 		'AUTHOR_LINK' => 'mailto:hsalkaline@gmail.com',
 		'DATE' => '16.05.2011',
-		'VERSION' => '0.1',
+		'VERSION' => '0.1.1',
 		'NAME' => 'ImageTransform',
-		'DESCRIPTION' => "Адаптация к Битриксу плагина для symfony sfImageTransform",
+		'DESCRIPTION' => "Адаптация к Битриксу плагина для symfony sfImageTransform. Подробнее читайте на сайте и в readme.odt",
 	);
 
 	public function initGem() {

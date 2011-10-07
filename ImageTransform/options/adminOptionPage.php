@@ -1,5 +1,5 @@
 <?
-
+/*
 function parseFile( $sPath ) {
 	$oContent = file_get_contents( $sPath );
 	$aMatches = array();
@@ -27,5 +27,14 @@ foreach ( $oIterator as $oFile ) {
 
 var_dump( $aTransforms );
 
-$aPresets = $aOptions['presets']['value'];
+$aPresets = $aOptions['presets']['value'];*/
+
+
+CAdminMessage::ShowMessage(
+	array(
+		'TYPE'=>'OK',
+		'MESSAGE' => 'Внимание<br />Гем в первую очередь предназначен для разработчиков, поэтому все настройки на текущий момент находятся в options.php.<br />Подробнее можно посмотреть в прилагаемом файле readme.odt, либо на <a href="http://bitrixgems.ru/gems/ImageTransform/">страничке гема</a>',
+		'HTML' => true
+	)
+);
 ?>
